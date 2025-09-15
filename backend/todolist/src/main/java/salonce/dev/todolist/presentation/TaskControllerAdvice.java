@@ -8,7 +8,7 @@ import salonce.dev.todolist.application.exceptions.ApiError;
 import salonce.dev.todolist.application.exceptions.TaskNotFound;
 
 @RestControllerAdvice
-public class TaskExceptionHandler {
+public class TaskControllerAdvice {
 
     @ExceptionHandler(TaskNotFound.class)
     public ResponseEntity<ApiError> taskNotFound(){

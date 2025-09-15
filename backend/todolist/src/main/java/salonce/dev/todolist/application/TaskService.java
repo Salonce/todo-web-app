@@ -5,10 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import salonce.dev.todolist.application.exceptions.TaskNotFound;
 import salonce.dev.todolist.domain.Task;
-import salonce.dev.todolist.infrastructure.TaskRepository;
+import salonce.dev.todolist.infrastructure.repositories.TaskRepository;
 import salonce.dev.todolist.presentation.in.PostTaskRequest;
-
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -17,7 +15,7 @@ public class TaskService {
     private final TaskRepository taskRepository;
 
     @Transactional
-    public Task createTask(PostTaskRequest postTaskRequest){
+    public Task saveTask(PostTaskRequest postTaskRequest){
         Task task = new Task();
         task.setDescription(postTaskRequest.description());
         task.setCompleted(postTaskRequest.completed());

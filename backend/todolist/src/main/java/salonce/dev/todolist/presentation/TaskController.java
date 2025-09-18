@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 import salonce.dev.todolist.application.TaskService;
 import salonce.dev.todolist.domain.Task;
+import salonce.dev.todolist.infrastructure.security.AccountPrincipal;
 import salonce.dev.todolist.presentation.in.PostTaskRequest;
 
 import java.net.URI;
@@ -19,10 +20,10 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping("/tasks/{taskId}")
-    public ResponseEntity<Task> getTask(@AuthenticationPrincipal OidcUser oidcUser, @PathVariable Long taskId){
+    public ResponseEntity<Task> getTask(@AuthenticationPrincipal AccountPrincipal accountPrincipal, @PathVariable Long taskId){
 
-        String subject = oidcUser.getSubject();
-        String email = oidcUser.getEmail();
+        Long id = accountPrincipal.id();
+        String email = accountPrincipal.email();
 
         return ResponseEntity.ok(taskService.getTask(taskId));
     }

@@ -1,5 +1,6 @@
 package salonce.dev.todolist.domain;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -12,6 +13,11 @@ import lombok.Setter;
 @Getter
 public class Account {
 
+    public Account (String email, String subject, String provider){
+        this.email = email;
+        identities.addIdentity(provider, subject, this);
+    }
+
     @GeneratedValue
     @Id
     private Long id;
@@ -20,15 +26,10 @@ public class Account {
     private String email;
 
     @Setter
-    private String subject;
+    @Embedded
+    private Identities identities = new Identities();
 
-    @Setter
-    private String provider;
-
-
-    public Account (String email, String subject, String provider){
-        this.email = email;
-        this.subject = subject;
-        this.provider = provider;
+    public Boolean identityExists(String provider, String subject){
+        return identities.identityExists(provider, subject);
     }
 }

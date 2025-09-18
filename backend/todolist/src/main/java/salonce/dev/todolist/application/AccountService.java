@@ -17,7 +17,7 @@ public class AccountService {
     }
 
     public Account loadOrCreateAccount(AccountDto accountDto){
-        return accountRepository.findBySubjectAndProvider(accountDto.subject(), accountDto.provider())
+        return accountRepository.findByIdentity(accountDto.subject(), accountDto.provider())
                 .orElseGet(() -> accountRepository.save(new Account(accountDto.email(), accountDto.subject(), accountDto.provider())));
     }
 }

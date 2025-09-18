@@ -1,3 +1,3 @@
-package salonce.dev.todolist.presentation.in;
+package salonce.dev.todolist.task.presentation.in;
 
 public record PostTaskRequest(String description, Boolean completed) {}

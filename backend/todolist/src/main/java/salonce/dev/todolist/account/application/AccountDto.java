@@ -1,3 +1,3 @@
-package salonce.dev.todolist.application;
+package salonce.dev.todolist.account.application;
 
 public record AccountDto(String email, String subject, String provider) {}

@@ -1,4 +1,4 @@
-package salonce.dev.todolist.infrastructure.security;
+package salonce.dev.todolist.account.infrastructure.security;
 
 import java.util.Set;
 

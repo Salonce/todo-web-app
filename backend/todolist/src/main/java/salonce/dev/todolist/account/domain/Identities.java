@@ -1,4 +1,4 @@
-package salonce.dev.todolist.domain;
+package salonce.dev.todolist.account.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embeddable;

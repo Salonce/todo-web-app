@@ -1,8 +1,7 @@
-package salonce.dev.todolist.domain;
+package salonce.dev.todolist.account.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
 
 
 @Entity

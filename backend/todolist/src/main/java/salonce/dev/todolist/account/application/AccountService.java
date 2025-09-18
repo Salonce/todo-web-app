@@ -1,9 +1,9 @@
-package salonce.dev.todolist.application;
+package salonce.dev.todolist.account.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import salonce.dev.todolist.domain.Account;
-import salonce.dev.todolist.infrastructure.repositories.AccountRepository;
+import salonce.dev.todolist.account.domain.Account;
+import salonce.dev.todolist.account.infrastructure.AccountRepository;
 
 @RequiredArgsConstructor
 @Service

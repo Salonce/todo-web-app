@@ -1,12 +1,12 @@
-package salonce.dev.todolist.application;
+package salonce.dev.todolist.task.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import salonce.dev.todolist.application.exceptions.TaskNotFound;
-import salonce.dev.todolist.domain.Task;
-import salonce.dev.todolist.infrastructure.repositories.TaskRepository;
-import salonce.dev.todolist.presentation.in.PostTaskRequest;
+import salonce.dev.todolist.task.application.exceptions.TaskNotFound;
+import salonce.dev.todolist.task.domain.Task;
+import salonce.dev.todolist.task.infrastructure.TaskRepository;
+import salonce.dev.todolist.task.presentation.in.PostTaskRequest;
 
 @RequiredArgsConstructor
 @Service

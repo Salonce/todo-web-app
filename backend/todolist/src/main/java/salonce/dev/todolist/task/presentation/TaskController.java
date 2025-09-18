@@ -1,15 +1,13 @@
-package salonce.dev.todolist.presentation;
+package salonce.dev.todolist.task.presentation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
-import salonce.dev.todolist.application.TaskService;
-import salonce.dev.todolist.domain.Task;
-import salonce.dev.todolist.infrastructure.security.AccountPrincipal;
-import salonce.dev.todolist.presentation.in.PostTaskRequest;
+import salonce.dev.todolist.task.application.TaskService;
+import salonce.dev.todolist.task.domain.Task;
+import salonce.dev.todolist.account.infrastructure.security.AccountPrincipal;
+import salonce.dev.todolist.task.presentation.in.PostTaskRequest;
 
 import java.net.URI;
 

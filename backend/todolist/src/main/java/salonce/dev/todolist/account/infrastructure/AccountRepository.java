@@ -1,9 +1,9 @@
-package salonce.dev.todolist.infrastructure.repositories;
+package salonce.dev.todolist.account.infrastructure;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import salonce.dev.todolist.domain.Account;
+import salonce.dev.todolist.account.domain.Account;
 
 import java.util.Optional;
 

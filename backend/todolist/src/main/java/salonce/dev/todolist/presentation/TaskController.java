@@ -29,7 +29,7 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    public ResponseEntity<Task> saveTask(@AuthenticationPrincipal OAuth2User oAuth2User, @RequestBody PostTaskRequest postTaskRequest){
+    public ResponseEntity<Task> saveTask(@AuthenticationPrincipal AccountPrincipal accountPrincipal, @RequestBody PostTaskRequest postTaskRequest){
         Task savedTask = taskService.saveTask(postTaskRequest);
         return ResponseEntity
                 .created(URI.create("/tasks/" + savedTask.getId()))
@@ -37,7 +37,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/tasks/{taskId}")
-    public ResponseEntity<Void> deleteTask(@AuthenticationPrincipal OAuth2User oAuth2User, @PathVariable Long taskId){
+    public ResponseEntity<Void> deleteTask(@AuthenticationPrincipal AccountPrincipal accountPrincipal, @PathVariable Long taskId){
         taskService.deleteTask(taskId);
         return ResponseEntity.noContent().build();
     }

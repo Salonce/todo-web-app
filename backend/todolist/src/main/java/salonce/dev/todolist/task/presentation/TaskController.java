@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import salonce.dev.todolist.task.application.TaskService;
 import salonce.dev.todolist.task.domain.Task;
 import salonce.dev.todolist.account.infrastructure.security.AccountPrincipal;
-import salonce.dev.todolist.task.presentation.in.PostTaskRequest;
-import salonce.dev.todolist.task.presentation.in.PutTaskRequest;
+import salonce.dev.todolist.task.presentation.dtos.PostTaskRequest;
+import salonce.dev.todolist.task.presentation.dtos.PutTaskRequest;
 
 import java.net.URI;
 import java.util.List;

@@ -5,10 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import salonce.dev.todolist.account.application.AccountService;
 import salonce.dev.todolist.account.infrastructure.security.AccountPrincipal;
-import salonce.dev.todolist.account.presentation.out.AccountResponse;
+import salonce.dev.todolist.account.presentation.dtos.AccountResponse;
+import salonce.dev.todolist.account.presentation.dtos.PutAccountRequest;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,7 +24,7 @@ public class AccountController {
     }
 
     @PutMapping("/account")
-    public ResponseEntity<AccountResponse> updateAccount(@AuthenticationPrincipal AccountPrincipal principal){
-
+    public ResponseEntity<AccountResponse> updateAccount(@AuthenticationPrincipal AccountPrincipal principal, @RequestBody PutAccountRequest putAccountRequest){
+        return ResponseEntity.ok(AccountMapper.toAccountResponse(accountService.updateAccount(principal.id(), putAccountRequest)));
     }
 }

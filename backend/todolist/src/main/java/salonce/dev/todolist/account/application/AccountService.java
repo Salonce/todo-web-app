@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import salonce.dev.todolist.account.domain.Account;
 import salonce.dev.todolist.account.infrastructure.AccountRepository;
+import salonce.dev.todolist.account.presentation.dtos.PutAccountRequest;
 import salonce.dev.todolist.task.application.exceptions.AccountNotFound;
 
 @RequiredArgsConstructor
@@ -24,5 +25,11 @@ public class AccountService {
 
     public Account findAccount(Long id){
         return accountRepository.findById(id).orElseThrow(AccountNotFound::new);
+    }
+
+    public Account updateAccount(Long id, PutAccountRequest putAccountRequest){
+        Account account = accountRepository.findById(id).orElseThrow(AccountNotFound::new);
+        //account.setName()
+        return accountRepository.save(account);
     }
 }

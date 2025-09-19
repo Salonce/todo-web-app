@@ -1,9 +1,7 @@
-package salonce.dev.todolist.domain;
+package salonce.dev.todolist.task.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,4 +20,8 @@ public class Task{
 
     @Setter
     private Boolean completed;
+
+    @Setter
+    @Column(name = "account_id")
+    private Long accountId;
 }

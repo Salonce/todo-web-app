@@ -1,4 +1,4 @@
-package salonce.dev.todolist.infrastructure.security;
+package salonce.dev.todolist.account.infrastructure.security;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,9 +11,9 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import salonce.dev.todolist.application.AccountService;
-import salonce.dev.todolist.application.AccountDto;
-import salonce.dev.todolist.domain.Account;
+import salonce.dev.todolist.account.application.AccountService;
+import salonce.dev.todolist.account.application.AccountDto;
+import salonce.dev.todolist.account.domain.Account;
 
 import java.io.IOException;
 import java.util.HashSet;

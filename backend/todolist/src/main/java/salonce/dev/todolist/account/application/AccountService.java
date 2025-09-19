@@ -1,9 +1,9 @@
-package salonce.dev.todolist.application;
+package salonce.dev.todolist.account.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import salonce.dev.todolist.domain.Account;
-import salonce.dev.todolist.infrastructure.repositories.AccountRepository;
+import salonce.dev.todolist.account.domain.Account;
+import salonce.dev.todolist.account.infrastructure.AccountRepository;
 
 @RequiredArgsConstructor
 @Service
@@ -17,7 +17,7 @@ public class AccountService {
     }
 
     public Account loadOrCreateAccount(AccountDto accountDto){
-        return accountRepository.findBySubjectAndProvider(accountDto.subject(), accountDto.provider())
+        return accountRepository.findByIdentity(accountDto.subject(), accountDto.provider())
                 .orElseGet(() -> accountRepository.save(new Account(accountDto.email(), accountDto.subject(), accountDto.provider())));
     }
 }

@@ -37,8 +37,8 @@ public class TaskService {
     }
 
     @Transactional
-    public Task updateTask(PutTaskRequest putTaskRequest, Long accountId){
-        Task task = taskRepository.findByIdAndAccountId(putTaskRequest.id(), accountId).orElseThrow(TaskNotFound::new);
+    public Task updateTask(Long taskId, PutTaskRequest putTaskRequest, Long accountId){
+        Task task = taskRepository.findByIdAndAccountId(taskId, accountId).orElseThrow(TaskNotFound::new);
         task.setCompleted(putTaskRequest.completed());
         task.setDescription(putTaskRequest.description());
         return taskRepository.save(task); // might be not needed

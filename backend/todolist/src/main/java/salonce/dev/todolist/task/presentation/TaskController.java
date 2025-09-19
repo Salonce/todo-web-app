@@ -30,8 +30,8 @@ public class TaskController {
     }
 
     @PutMapping("/tasks/{taskId}")
-    public ResponseEntity<Task> updateTask(@AuthenticationPrincipal AccountPrincipal principal, @RequestBody PutTaskRequest putTaskRequest){
-        return ResponseEntity.ok(taskService.updateTask(putTaskRequest, principal.id()));
+    public ResponseEntity<Task> updateTask(@AuthenticationPrincipal AccountPrincipal principal, @RequestBody PutTaskRequest putTaskRequest, @PathVariable Long taskId){
+        return ResponseEntity.ok(taskService.updateTask(taskId, putTaskRequest, principal.id()));
     }
 
     @PostMapping("/tasks")

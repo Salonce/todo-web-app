@@ -1,3 +1,3 @@
 package salonce.dev.todolist.task.presentation.in;
 
-public record PutTaskRequest(Long id, String description, Boolean completed){};
+public record PutTaskRequest(String description, Boolean completed){}

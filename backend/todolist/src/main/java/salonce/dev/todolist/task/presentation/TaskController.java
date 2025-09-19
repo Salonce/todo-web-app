@@ -10,6 +10,7 @@ import salonce.dev.todolist.account.infrastructure.security.AccountPrincipal;
 import salonce.dev.todolist.task.presentation.in.PostTaskRequest;
 
 import java.net.URI;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,26 +18,27 @@ public class TaskController {
 
     private final TaskService taskService;
 
+    @GetMapping("/tasks")
+    public ResponseEntity<List<Task>> getTasks(@AuthenticationPrincipal AccountPrincipal principal){
+        return ResponseEntity.ok(taskService.getTasks(principal.id()));
+    }
+
     @GetMapping("/tasks/{taskId}")
-    public ResponseEntity<Task> getTask(@AuthenticationPrincipal AccountPrincipal accountPrincipal, @PathVariable Long taskId){
-
-        Long id = accountPrincipal.id();
-        String email = accountPrincipal.email();
-
-        return ResponseEntity.ok(taskService.getTask(taskId));
+    public ResponseEntity<Task> getTask(@AuthenticationPrincipal AccountPrincipal principal, @PathVariable Long taskId){
+        return ResponseEntity.ok(taskService.getTask(taskId, principal.id()));
     }
 
     @PostMapping("/tasks")
-    public ResponseEntity<Task> saveTask(@AuthenticationPrincipal AccountPrincipal accountPrincipal, @RequestBody PostTaskRequest postTaskRequest){
-        Task savedTask = taskService.saveTask(postTaskRequest);
+    public ResponseEntity<Task> saveTask(@AuthenticationPrincipal AccountPrincipal principal, @RequestBody PostTaskRequest postTaskRequest){
+        Task savedTask = taskService.saveTask(postTaskRequest, principal.id());
         return ResponseEntity
                 .created(URI.create("/tasks/" + savedTask.getId()))
                 .body(savedTask);
     }
 
     @DeleteMapping("/tasks/{taskId}")
-    public ResponseEntity<Void> deleteTask(@AuthenticationPrincipal AccountPrincipal accountPrincipal, @PathVariable Long taskId){
-        taskService.deleteTask(taskId);
+    public ResponseEntity<Void> deleteTask(@AuthenticationPrincipal AccountPrincipal principal, @PathVariable Long taskId){
+        taskService.deleteTask(taskId, principal.id());
         return ResponseEntity.noContent().build();
     }
 }

@@ -8,6 +8,7 @@ import salonce.dev.todolist.task.application.TaskService;
 import salonce.dev.todolist.task.domain.Task;
 import salonce.dev.todolist.account.infrastructure.security.AccountPrincipal;
 import salonce.dev.todolist.task.presentation.in.PostTaskRequest;
+import salonce.dev.todolist.task.presentation.in.PutTaskRequest;
 
 import java.net.URI;
 import java.util.List;
@@ -26,6 +27,11 @@ public class TaskController {
     @GetMapping("/tasks/{taskId}")
     public ResponseEntity<Task> getTask(@AuthenticationPrincipal AccountPrincipal principal, @PathVariable Long taskId){
         return ResponseEntity.ok(taskService.getTask(taskId, principal.id()));
+    }
+
+    @PutMapping("/tasks/{taskId}")
+    public ResponseEntity<Task> updateTask(@AuthenticationPrincipal AccountPrincipal principal, @RequestBody PutTaskRequest putTaskRequest){
+        return ResponseEntity.ok(taskService.updateTask(putTaskRequest, principal.id()));
     }
 
     @PostMapping("/tasks")

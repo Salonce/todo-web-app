@@ -7,6 +7,7 @@ import salonce.dev.todolist.task.application.exceptions.TaskNotFound;
 import salonce.dev.todolist.task.domain.Task;
 import salonce.dev.todolist.task.infrastructure.TaskRepository;
 import salonce.dev.todolist.task.presentation.in.PostTaskRequest;
+import salonce.dev.todolist.task.presentation.in.PutTaskRequest;
 
 import java.util.List;
 
@@ -33,6 +34,14 @@ public class TaskService {
     @Transactional
     public Task getTask(Long id, Long accountId){
         return taskRepository.findByIdAndAccountId(id, accountId).orElseThrow(TaskNotFound::new);
+    }
+
+    @Transactional
+    public void updateTask(PutTaskRequest putTaskRequest, Long accountId){
+        if (taskRepository.existsByIdAndAccountId(id, accountId))
+            taskRepository.deleteByIdAndAccountId(id, accountId);
+        else
+            throw new TaskNotFound();
     }
 
     @Transactional

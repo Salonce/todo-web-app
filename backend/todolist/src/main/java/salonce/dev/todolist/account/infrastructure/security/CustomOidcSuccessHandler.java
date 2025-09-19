@@ -36,8 +36,9 @@ public class CustomOidcSuccessHandler implements AuthenticationSuccessHandler {
 
         String subject = oidcUser.getSubject();
         String email = oidcUser.getEmail();
+        String name = oidcUser.getName();
 
-        AccountDto accountDto = new AccountDto(email, subject, provider);
+        AccountDto accountDto = new AccountDto(email, subject, provider, name);
         Account account = accountService.loadOrCreateAccount(accountDto);
         AccountPrincipal accountPrincipal = new AccountPrincipal(account.getId(), account.getEmail(), new HashSet<>());
 

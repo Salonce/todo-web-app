@@ -13,14 +13,18 @@ import lombok.Setter;
 @Getter
 public class Account {
 
-    public Account (String email, String subject, String provider){
+    public Account (String email, String subject, String provider, String name){
         this.email = email;
+        this.name = name;
         identities.addIdentity(provider, subject, this);
     }
 
     @GeneratedValue
     @Id
     private Long id;
+
+    @Setter
+    private String name;
 
     @Setter
     private String email;

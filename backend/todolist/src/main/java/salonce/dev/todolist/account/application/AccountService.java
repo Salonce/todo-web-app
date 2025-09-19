@@ -14,13 +14,13 @@ public class AccountService {
     private final AccountRepository accountRepository;
 
     public Account saveAccount(AccountDto accountDto){
-        Account account = new Account(accountDto.email(), accountDto.subject(), accountDto.provider());
+        Account account = new Account(accountDto.email(), accountDto.subject(), accountDto.provider(), accountDto.name());
         return accountRepository.save(account);
     }
 
     public Account loadOrCreateAccount(AccountDto accountDto){
         return accountRepository.findByIdentity(accountDto.subject(), accountDto.provider())
-                .orElseGet(() -> accountRepository.save(new Account(accountDto.email(), accountDto.subject(), accountDto.provider())));
+                .orElseGet(() -> accountRepository.save(new Account(accountDto.email(), accountDto.subject(), accountDto.provider(), accountDto.name())));
     }
 
     public Account findAccount(Long id){
@@ -29,7 +29,7 @@ public class AccountService {
 
     public Account updateAccount(Long id, PutAccountRequest putAccountRequest){
         Account account = accountRepository.findById(id).orElseThrow(AccountNotFound::new);
-        //account.setName()
+        account.setName(putAccountRequest.name());
         return accountRepository.save(account);
     }
 }

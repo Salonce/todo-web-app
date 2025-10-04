@@ -18,6 +18,11 @@ public class AccountController {
 
     private final AccountService accountService;
 
+    @GetMapping("/auth")
+    public ResponseEntity<AccountPrincipal> getAuth(@AuthenticationPrincipal AccountPrincipal principal){
+        return ResponseEntity.ok(principal);
+    }
+
     @GetMapping("/account")
     public ResponseEntity<AccountResponse> getAccount(@AuthenticationPrincipal AccountPrincipal principal){
         return ResponseEntity.ok(AccountMapper.toAccountResponse(accountService.findAccount(principal.id())));

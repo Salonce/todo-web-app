@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 public class Account {
 
-    public Account (String email, String subject, String provider, String name){
+    public Account (String email, String name, String subject, String provider){
         this.email = email;
         this.name = name;
         identities.addIdentity(provider, subject, this);

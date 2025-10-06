@@ -36,9 +36,11 @@ public class CustomOidcSuccessHandler implements AuthenticationSuccessHandler {
 
         String subject = oidcUser.getSubject();
         String email = oidcUser.getEmail();
-        String name = oidcUser.getName();
+        String name = oidcUser.getGivenName();
 
-        AccountDto accountDto = new AccountDto(email, subject, provider, name);
+        System.out.println(name);
+
+        AccountDto accountDto = new AccountDto(email, name, subject, provider);
         Account account = accountService.loadOrCreateAccount(accountDto);
         AccountPrincipal accountPrincipal = new AccountPrincipal(account.getId(), account.getEmail(), new HashSet<>());
 
@@ -49,6 +51,6 @@ public class CustomOidcSuccessHandler implements AuthenticationSuccessHandler {
         );
 
         SecurityContextHolder.getContext().setAuthentication(auth);
-        response.sendRedirect("/home");
+        response.sendRedirect("http://localhost:4200/home");
     }
 }

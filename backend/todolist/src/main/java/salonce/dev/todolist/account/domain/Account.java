@@ -1,21 +1,23 @@
 package salonce.dev.todolist.account.domain;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
 @Getter
 public class Account {
 
-    public Account (String email, String subject, String provider){
+    public Account (String email, String name, String subject, String provider){
         this.email = email;
-        identities.addIdentity(provider, subject, this);
+        this.name = name;
+        this.addUserRole();
+        this.addAdminRole();
+        identities.addIdentity(provider, subject);
     }
 
     @GeneratedValue
@@ -23,13 +25,46 @@ public class Account {
     private Long id;
 
     @Setter
-    private String email;
+    private String name;
 
     @Setter
+    private String email;
+
+    @Embedded
+    private Roles roles = new Roles();
+
     @Embedded
     private Identities identities = new Identities();
 
     public Boolean identityExists(String provider, String subject){
         return identities.identityExists(provider, subject);
+    }
+
+    public Set<String> getRoles(){
+        return roles.getNames();
+    }
+
+    public void addAdminRole() {
+        roles.addAdminRole();
+    }
+
+    public void addUserRole() {
+        roles.addUserRole();
+    }
+
+    public void addModeratorRole() {
+        roles.addModeratorRole();
+    }
+
+    public void removeAdminRole() {
+        roles.removeAdminRole();
+    }
+
+    public void removeUserRole() {
+        roles.removeUserRole();
+    }
+
+    public void removeModeratorRole() {
+        roles.removeModeratorRole();
     }
 }

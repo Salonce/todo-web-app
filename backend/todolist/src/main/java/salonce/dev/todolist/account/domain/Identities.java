@@ -1,8 +1,6 @@
 package salonce.dev.todolist.account.domain;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,21 +8,22 @@ import java.util.Set;
 @Embeddable
 public class Identities {
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ElementCollection
+    @CollectionTable(name = "account_identities", joinColumns = @JoinColumn(name = "account_id"))
     private final Set<Identity> items = new HashSet<>();
 
     public Boolean identityExists(String provider, String subject){
         return items.stream().anyMatch(identity -> (identity.getProvider().equals(provider) && identity.getSubject().equals(subject)));
     }
 
-    public void addIdentity(String provider, String subject, Account account){
-        Identity identity = new Identity(provider, subject, account);
+    public void addIdentity(String provider, String subject){
+        Identity identity = new Identity(provider, subject);
         items.add(identity);
     }
 
-    public void addIdentityIfAbsent(String provider, String subject, Account account) {
+    public void addIdentityIfAbsent(String provider, String subject) {
         if (!identityExists(provider, subject)) {
-            addIdentity(provider, subject, account);
+            addIdentity(provider, subject);
         }
     }
 }

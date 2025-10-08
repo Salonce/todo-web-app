@@ -6,7 +6,8 @@ import { of } from 'rxjs/internal/observable/of';
 
 export interface Principal {
   id: number;
-  email: string
+  email: string;
+  roles: string[]
 }
 
 @Injectable({ providedIn: 'root' })

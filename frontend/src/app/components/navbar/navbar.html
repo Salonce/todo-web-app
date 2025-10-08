@@ -10,6 +10,14 @@
       <!-- Links -->
       <div class="hidden md:flex space-x-6">
         @if (principal$ | async; as principal) {
+              @if (principal.roles.includes('ADMIN')) {
+                <a 
+                  href="/dashboard" 
+                  class="text-gray-800 hover:text-gray-600 transition-colors"
+                >
+                  Dashboard
+                </a>
+              }
           <a href="/settings" class="text-gray-800 hover:text-gray-600 transition-colors">Settings</a>
           <a href="#/" (click)="onLogout(); $event.preventDefault()" class="text-gray-800 hover:text-gray-600 transition-colors">Log out</a>
         } @else {

@@ -1,3 +1,5 @@
 package salonce.dev.todolist.account.presentation.dtos;
 
-public record AccountResponse(Long id, String email, String name) {}
+import java.util.Set;
+
+public record AccountResponse(Long id, String email, String name, Set<String> roles) {}

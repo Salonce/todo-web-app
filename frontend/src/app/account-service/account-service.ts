@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/internal/Observable';
 export interface Account {
   id: number;
   email: string;
-  name: string
+  name: string;
+  roles: string[]
 }
 
 @Injectable({

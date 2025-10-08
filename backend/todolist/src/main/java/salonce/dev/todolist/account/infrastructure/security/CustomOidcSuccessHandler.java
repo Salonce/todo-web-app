@@ -17,6 +17,7 @@ import salonce.dev.todolist.account.domain.Account;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Component
@@ -38,11 +39,9 @@ public class CustomOidcSuccessHandler implements AuthenticationSuccessHandler {
         String email = oidcUser.getEmail();
         String name = oidcUser.getGivenName();
 
-        System.out.println(name);
-
         AccountDto accountDto = new AccountDto(email, name, subject, provider);
         Account account = accountService.loadOrCreateAccount(accountDto);
-        AccountPrincipal accountPrincipal = new AccountPrincipal(account.getId(), account.getEmail(), new HashSet<>());
+        AccountPrincipal accountPrincipal = new AccountPrincipal(account.getId(), account.getEmail(), account.getRoles());
 
         Authentication auth = new UsernamePasswordAuthenticationToken(
                 accountPrincipal,

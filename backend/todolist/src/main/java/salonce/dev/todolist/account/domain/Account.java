@@ -17,7 +17,7 @@ public class Account {
         this.name = name;
         this.addUserRole();
         this.addAdminRole();
-        identities.addIdentity(provider, subject, this);
+        identities.addIdentity(provider, subject);
     }
 
     @GeneratedValue

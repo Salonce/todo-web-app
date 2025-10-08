@@ -1,9 +1,6 @@
 package salonce.dev.todolist.account.domain;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,7 +11,7 @@ import java.util.stream.Collectors;
 @Embeddable
 public class Roles {
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "account_roles", joinColumns = @JoinColumn(name = "account_id"))
     private Set<Role> values = new HashSet<>();
 

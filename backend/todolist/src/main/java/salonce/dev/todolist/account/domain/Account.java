@@ -30,9 +30,11 @@ public class Account {
     @Setter
     private String email;
 
+    @Setter
     @Embedded
     private Roles roles = new Roles();
 
+    @Setter
     @Embedded
     private Identities identities = new Identities();
 

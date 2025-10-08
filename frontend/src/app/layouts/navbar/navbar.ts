@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { AuthService, Principal } from '../auth-service/auth-service';
+import { AuthService, Principal } from '../../core/auth-service/auth-service';
 import { Observable } from 'rxjs/internal/Observable';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })

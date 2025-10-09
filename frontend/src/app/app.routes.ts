@@ -7,6 +7,7 @@ import { AccountEditPage } from './pages/account-edit-page/account-edit-page';
 import { DashboardLayout } from './layouts/dashboard-layout/dashboard-layout';
 import { DashboardHomePage } from './pages/dashboard-home-page/dashboard-home-page';
 import { ArticleNewPage } from './pages/article-new-page/article-new-page';
+import { ArticlePage } from './pages/article-page/article-page';
 
 export const routes: Routes = [
     {
@@ -32,6 +33,13 @@ export const routes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardHomePage },
             { path: 'new-article', component: ArticleNewPage },
+        ]
+    },
+    {
+        path: '', 
+        component: MainLayout,
+        children: [
+        { path: ':slug', component: ArticlePage }
         ]
     }
 ];

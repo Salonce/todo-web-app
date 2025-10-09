@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ArticleService } from '../../core/article-service/article-service';
+import { Article } from '../../core/models/article';
 
 @Component({
   selector: 'app-article-new-page',
@@ -9,13 +11,20 @@ import { FormsModule } from '@angular/forms';
 })
 export class ArticleNewPage {
 
-    article = {
+  constructor(private articleService : ArticleService){}
+
+  article : Article = {
     title: '',
-    text: ''
+    content: ''
+    
   };
 
   onSubmit() {
-    console.log('New Article:', this.article);
+    console.log('Article object:', this.article);
+    console.log('Content value:', this.article.content);
+    this.articleService.postArticle(this.article).subscribe(res => {
+      console.log('New Article:', res);
+    });
   }
 
 }

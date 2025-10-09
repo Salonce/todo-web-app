@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Account, AccountService } from '../../core/account-service/account-service';
+import { AccountService } from '../../core/account-service/account-service';
+import { Account } from '../../core/models/account';
 
 @Component({
   selector: 'app-settings-page',

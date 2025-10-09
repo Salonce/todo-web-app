@@ -1,4 +1,4 @@
-package salonce.dev.todolist.account.presentation;
+package salonce.dev.todolist.article.presentation;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,9 +8,9 @@ import salonce.dev.todolist.task.application.exceptions.ApiError;
 import salonce.dev.todolist.task.application.exceptions.TaskNotFound;
 
 @RestControllerAdvice
-public class AccountControllerAdvice {
+public class ArticleControllerAdvice {
     @ExceptionHandler(TaskNotFound.class)
-    public ResponseEntity<ApiError> accountNotFound(){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiError("Account not found"));
+    public ResponseEntity<ApiError> articleNotFound(){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiError("Article not found"));
     }
 }

@@ -3,12 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
-
-export interface Principal {
-  id: number;
-  email: string;
-  roles: string[]
-}
+import { Principal } from '../models/principal';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

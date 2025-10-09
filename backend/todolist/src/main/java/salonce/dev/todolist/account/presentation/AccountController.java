@@ -3,14 +3,11 @@ package salonce.dev.todolist.account.presentation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import salonce.dev.todolist.account.application.AccountService;
 import salonce.dev.todolist.account.infrastructure.security.AccountPrincipal;
 import salonce.dev.todolist.account.presentation.dtos.AccountResponse;
-import salonce.dev.todolist.account.presentation.dtos.PutAccountRequest;
+import salonce.dev.todolist.account.presentation.dtos.PatchProfileRequest;
 
 @RequiredArgsConstructor
 @RestController
@@ -28,8 +25,8 @@ public class AccountController {
         return ResponseEntity.ok(AccountMapper.toAccountResponse(accountService.findAccount(principal.id())));
     }
 
-    @PutMapping("/account")
-    public ResponseEntity<AccountResponse> updateAccount(@AuthenticationPrincipal AccountPrincipal principal, @RequestBody PutAccountRequest putAccountRequest){
-        return ResponseEntity.ok(AccountMapper.toAccountResponse(accountService.updateAccount(principal.id(), putAccountRequest)));
+    @PatchMapping("/profile")
+    public ResponseEntity<AccountResponse> patchProfile(@AuthenticationPrincipal AccountPrincipal principal, @RequestBody PatchProfileRequest patchProfileRequest){
+        return ResponseEntity.ok(AccountMapper.toAccountResponse(accountService.updateProfile(principal.id(), patchProfileRequest)));
     }
 }

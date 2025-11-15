@@ -1,10 +1,11 @@
 package salonce.dev.todolist.account.application;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import salonce.dev.todolist.account.domain.Account;
 import salonce.dev.todolist.account.infrastructure.AccountRepository;
-import salonce.dev.todolist.account.presentation.dtos.PutAccountRequest;
+import salonce.dev.todolist.account.presentation.dtos.PatchProfileRequest;
 import salonce.dev.todolist.task.application.exceptions.AccountNotFound;
 
 @RequiredArgsConstructor
@@ -27,9 +28,10 @@ public class AccountService {
         return accountRepository.findById(id).orElseThrow(AccountNotFound::new);
     }
 
-    public Account updateAccount(Long id, PutAccountRequest putAccountRequest){
+    @Transactional
+    public Account updateProfile(Long id, PatchProfileRequest request){
         Account account = accountRepository.findById(id).orElseThrow(AccountNotFound::new);
-        account.setName(putAccountRequest.name());
+        account.setName(request.name());
         return accountRepository.save(account);
     }
 }

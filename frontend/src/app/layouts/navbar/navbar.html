@@ -1,0 +1,40 @@
+<nav class="bg-amber-200 shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      
+      <!-- Logo / Brand -->
+      <div class="flex-shrink-0">
+        <a [routerLink]="['/home']" class="text-lg font-bold text-gray-800">News</a>
+      </div>
+
+      <!-- Links -->
+      <div class="hidden md:flex space-x-6">
+        @if (principal$ | async; as principal) {
+              @if (principal.roles.includes('ADMIN')) {
+                <a 
+                  [routerLink]="['/dashboard']"
+                  class="text-gray-800 hover:text-gray-600 transition-colors"
+                >
+                  Dashboard
+                </a>
+              }
+          <a [routerLink]="['/settings']" class="text-gray-800 hover:text-gray-600 transition-colors">Settings</a>
+          <a href="#/" (click)="onLogout(); $event.preventDefault()" class="text-gray-800 hover:text-gray-600 transition-colors">Log out</a>
+        } @else {
+          <a href="http://localhost:8080/oauth2/authorization/google" class="text-gray-800 hover:text-gray-600 transition-colors">Log in</a>
+        }
+      </div>
+
+      <!-- Hamburger (for mobile) -->
+      <div class="md:hidden">
+        <button class="text-gray-800 hover:text-gray-600 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</nav>

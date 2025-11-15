@@ -11,6 +11,6 @@ import salonce.dev.todolist.task.application.exceptions.TaskNotFound;
 public class AccountControllerAdvice {
     @ExceptionHandler(TaskNotFound.class)
     public ResponseEntity<ApiError> accountNotFound(){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiError("A not found"));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiError("Account not found"));
     }
 }

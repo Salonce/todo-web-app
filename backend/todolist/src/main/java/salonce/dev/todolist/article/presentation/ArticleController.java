@@ -1,6 +1,8 @@
 package salonce.dev.todolist.article.presentation;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +11,6 @@ import salonce.dev.todolist.article.application.ArticleService;
 import salonce.dev.todolist.article.presentation.dtos.ArticleSaveRequest;
 import salonce.dev.todolist.article.presentation.dtos.ArticleResponse;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class ArticleController {
@@ -18,8 +18,8 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @GetMapping("/api/articles")
-    public ResponseEntity<List<ArticleResponse>> getAllArticles(){
-        return ResponseEntity.ok(articleService.getAllArticles());
+    public ResponseEntity<Page<ArticleResponse>> getAllArticles(Pageable pageable){
+        return ResponseEntity.ok(articleService.getAllArticles(pageable));
     }
 
     @GetMapping("/api/articles/{slug}")

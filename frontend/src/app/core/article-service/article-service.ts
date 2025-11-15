@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { NewArticle } from '../models/new-article';
+import { Page } from '../models/page';
+import { Article } from '../models/article';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +24,8 @@ export class ArticleService {
     );
   }
 
-  getArticles() : Observable<NewArticle[]> {
-    return this.http.get<NewArticle[]>(this.apiUrl, {withCredentials : true}).pipe(
+  getArticles() : Observable<Page<Article>> {
+    return this.http.get<Page<Article>>(this.apiUrl, {withCredentials : true}).pipe(
       catchError(err => {
         console.error('Failed to post article', err);
         return throwError(() => new Error('Could not fetch articles'));

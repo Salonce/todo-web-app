@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ArticleService } from '../../core/article-service/article-service';
-import { NewArticle } from '../../core/models/new-article';
 import { Observable } from 'rxjs/internal/Observable';
+import { Page } from '../../core/models/page';
+import { Article } from '../../core/models/article';
 
 @Component({
   selector: 'app-home-page',
@@ -11,11 +12,9 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class HomePage {
   
-  $articles: Observable<NewArticle[]>; // backend returns [] when there are no articles
+  $articlesPage: Observable<Page<Article>>;
 
   constructor(private articleService : ArticleService){
-    this.$articles = articleService.getArticles();
+    this.$articlesPage = articleService.getArticles();
   }
-
-  
 }

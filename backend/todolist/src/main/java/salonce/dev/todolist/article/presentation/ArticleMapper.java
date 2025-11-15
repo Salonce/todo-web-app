@@ -6,6 +6,6 @@ import salonce.dev.todolist.article.presentation.dtos.ArticleResponse;
 public class ArticleMapper {
 
     public static ArticleResponse toArticleResponse(Article article){
-        return new ArticleResponse(article.getTitle(), article.getContent(), article.getAuthor().getName());
+        return new ArticleResponse(article.getTitle(), article.getSlug(), article.getContent(), article.getAuthor().getName());
     }
 }

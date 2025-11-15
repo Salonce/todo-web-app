@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Article } from '../models/article';
+import { NewArticle } from '../models/new-article';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class ArticleService {
 
   private readonly apiUrl = 'http://localhost:8080/api/articles'
 
-  getArticleBySlug(slug : string) : Observable<Article> {
-    return this.http.get<Article>(`http://localhost:8080/api/articles/${slug}`, {withCredentials: true}).pipe(
+  getArticleBySlug(slug : string) : Observable<NewArticle> {
+    return this.http.get<NewArticle>(`http://localhost:8080/api/articles/${slug}`, {withCredentials: true}).pipe(
       catchError(err => {
         console.error('Failed to fetch article', err);
         return throwError(() => new Error('Could not fetch article'));
@@ -22,18 +22,8 @@ export class ArticleService {
     );
   }
 
-
-  // getArticle(id : number) : Observable<Article> {
-  //   return this.http.get<Article>(`${this.apiUrl}/${id}`, {withCredentials: true}).pipe(
-  //     catchError(err => {
-  //       console.error('Failed to fetch article', err);
-  //       return throwError(() => new Error('Could not fetch article'));
-  //     })
-  //   );
-  // }
-
-  getArticles() : Observable<Article[]> {
-    return this.http.get<Article[]>(this.apiUrl, {withCredentials : true}).pipe(
+  getArticles() : Observable<NewArticle[]> {
+    return this.http.get<NewArticle[]>(this.apiUrl, {withCredentials : true}).pipe(
       catchError(err => {
         console.error('Failed to post article', err);
         return throwError(() => new Error('Could not fetch articles'));
@@ -41,8 +31,8 @@ export class ArticleService {
     )
   }
 
-  postArticle(article: Article) : Observable<Article> {
-    return this.http.post<Article>(this.apiUrl, article, {withCredentials : true}).pipe(
+  postArticle(article: NewArticle) : Observable<NewArticle> {
+    return this.http.post<NewArticle>(this.apiUrl, article, {withCredentials : true}).pipe(
       catchError(err => {
         console.error('Failed to post article', err);
         return throwError(() => new Error('Could not fetch article'));

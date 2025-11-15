@@ -13,11 +13,11 @@ import { Principal } from '../../core/models/principal';
 })
 export class Navbar {
 
-  constructor(private authService: AuthService, private router: Router){
+  principal$: Observable<Principal | null>;
+
+  constructor(private authService: AuthService){
     this.principal$ = this.authService.principal$;
   }
-  
-  principal$: Observable<Principal | null>;
 
   onLogout() : void {
     this.authService.logout();

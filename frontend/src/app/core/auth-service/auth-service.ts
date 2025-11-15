@@ -23,16 +23,18 @@ export class AuthService {
       });
   }
 
-  setAccount(principal: Principal) {
-    this.principalSubject.next(principal);
-  }
-
   logout() {
     this.http.post('http://localhost:8080/logout', {}, { withCredentials: true })
       .subscribe({
         next: () => this.principalSubject.next(null),  
         error: () => this.principalSubject.next(null)   
       });
+  }
+
+  /* V not needed? V*/
+
+  setAccount(principal: Principal) {
+    this.principalSubject.next(principal);
   }
 
   isLoggedIn(): boolean {

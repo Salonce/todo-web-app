@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Article } from '../../core/models/article';
+import { NewArticle } from '../../core/models/new-article';
 import { ArticleService } from '../../core/article-service/article-service';
 
 @Component({
@@ -14,7 +14,7 @@ import { ArticleService } from '../../core/article-service/article-service';
 export class ArticlePage implements OnInit {
 
   slug!: string;
-  article!: Article;
+  article!: NewArticle;
 
   constructor(private articleService: ArticleService, private route: ActivatedRoute) { }
 
@@ -27,13 +27,14 @@ export class ArticlePage implements OnInit {
   }
 
   loadArticle(slug: string) {
-      this.articleService.getArticleBySlug(slug).subscribe({
-        next: (data: Article) => {
-          this.article = data;
-        },
-        error: (err) => {
-          console.error('Failed to load article:', err);
-        }
-      });
-    }
+    this.articleService.getArticleBySlug(slug).subscribe({
+      next: (article: NewArticle) => {
+        this.article = article;
+      },
+      error: (err) => {
+        console.error('Failed to load article:', err);
+      }
+    });
+  }
+
 }

@@ -3,7 +3,7 @@ import { Pageable } from "./pageable";
 import { Sort } from "./sort";
 
 export interface Page<T> {
-  content: Article[];             // array of your DTOs
+  content: T[];             // array of your DTOs
   pageable: Pageable;
   totalElements: number;
   totalPages: number;

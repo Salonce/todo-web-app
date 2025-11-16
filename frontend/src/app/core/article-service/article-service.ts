@@ -15,15 +15,6 @@ export class ArticleService {
 
   private readonly apiUrl = 'http://localhost:8080/api/articles'
 
-  getArticleBySlug(slug : string) : Observable<NewArticle> {
-    return this.http.get<NewArticle>(`http://localhost:8080/api/articles/${slug}`, {withCredentials: true}).pipe(
-      catchError(err => {
-        console.error('Failed to fetch article', err);
-        return throwError(() => new Error('Could not fetch article'));
-      })
-    );
-  }
-
   getArticles() : Observable<Page<Article>> {
     return this.http.get<Page<Article>>(this.apiUrl, {withCredentials : true}).pipe(
       catchError(err => {
@@ -31,6 +22,15 @@ export class ArticleService {
         return throwError(() => new Error('Could not fetch articles'));
       })
     )
+  }
+
+  getArticleBySlug(slug : string) : Observable<NewArticle> {
+    return this.http.get<NewArticle>(`http://localhost:8080/api/articles/${slug}`, {withCredentials: true}).pipe(
+      catchError(err => {
+        console.error('Failed to fetch article', err);
+        return throwError(() => new Error('Could not fetch article'));
+      })
+    );
   }
 
   postArticle(article: NewArticle) : Observable<NewArticle> {

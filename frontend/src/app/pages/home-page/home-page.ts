@@ -3,10 +3,11 @@ import { ArticleService } from '../../core/article-service/article-service';
 import { Observable } from 'rxjs/internal/Observable';
 import { Page } from '../../core/models/page';
 import { Article } from '../../core/models/article';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css'
 })
@@ -17,4 +18,10 @@ export class HomePage {
   constructor(private articleService : ArticleService){
     this.$articlesPage = articleService.getArticles();
   }
+
+  getPreview = (content: string): string => {
+    if (!content) return '';
+    const sentences = content.split(/(?<=[.!?])\s+/);
+    return sentences.slice(0, 3).join(' ');
+  };
 }

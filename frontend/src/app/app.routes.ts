@@ -39,7 +39,7 @@ export const routes: Routes = [
         path: '', 
         component: MainLayout,
         children: [
-        { path: ':slug', component: ArticlePage }
+        { path: 'articles/:slug', component: ArticlePage }
         ]
     }
 ];

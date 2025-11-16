@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NewArticle } from '../../core/models/new-article';
 import { ArticleService } from '../../core/article-service/article-service';
+import { Article } from '../../core/models/article';
 
 @Component({
   selector: 'app-article-page',
@@ -14,7 +14,7 @@ import { ArticleService } from '../../core/article-service/article-service';
 export class ArticlePage implements OnInit {
 
   slug!: string;
-  article!: NewArticle;
+  article!: Article;
 
   constructor(private articleService: ArticleService, private route: ActivatedRoute) { }
 
@@ -28,7 +28,7 @@ export class ArticlePage implements OnInit {
 
   loadArticle(slug: string) {
     this.articleService.getArticleBySlug(slug).subscribe({
-      next: (article: NewArticle) => {
+      next: (article: Article) => {
         this.article = article;
       },
       error: (err) => {
@@ -36,5 +36,4 @@ export class ArticlePage implements OnInit {
       }
     });
   }
-
 }

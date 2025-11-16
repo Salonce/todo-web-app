@@ -20,7 +20,7 @@ public class FilterChainConfig {
         return http
                 .authorizeHttpRequests( authorize -> authorize
                         .requestMatchers("/oauth2/**").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/api/articles").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/articles/**").permitAll()
                         .anyRequest().authenticated())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .csrf(csrf -> csrf.disable())

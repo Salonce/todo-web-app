@@ -1,0 +1,32 @@
+<div class="flex justify-center space-x-2 mt-6">
+
+  <!-- Previous button -->
+  <button
+    class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+    (click)="prev()"
+    [disabled]="currentPage === 0"
+  >
+    Prev
+  </button>
+
+  <!-- Page numbers -->
+  @for (page of pages(); track page) {
+    <button
+      class="px-3 py-1 rounded border
+             {{ currentPage === page ? 'bg-gray-400 text-white border-gray-400' : 'bg-white border-gray-200 hover:bg-gray-100' }}"
+      (click)="goToPage(page)"
+    >
+      {{ page + 1 }}
+    </button>
+  }
+
+  <!-- Next button -->
+  <button
+    class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+    (click)="next()"
+    [disabled]="currentPage === totalPages - 1"
+  >
+    Next
+  </button>
+
+</div>

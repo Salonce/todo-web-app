@@ -11,9 +11,7 @@
       </h2>
 
       <!-- First 3 sentences -->
-      <p class="text-gray-700 mb-2">
-        {{ getPreview(article.content) }}...
-      </p>
+      <p class="text-gray-700 mb-2" [innerHTML]="getSafeHtml(getPreview(article.content) + '...')"></p>
 
       <!-- Author -->
       <p class="text-sm text-gray-500">

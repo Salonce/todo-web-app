@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Article } from '../../core/models/article';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-article-list',
@@ -10,6 +11,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ArticleList {
 
+  constructor(private sanitizer: DomSanitizer){}
+
   @Input() articles : Article[] = [];
 
   getPreview = (content: string): string => {
@@ -17,4 +20,8 @@ export class ArticleList {
     const sentences = content.split(/(?<=[.!?])\s+/);
     return sentences.slice(0, 3).join(' ');
   };
+
+  getSafeHtml(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
 }

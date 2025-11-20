@@ -24,10 +24,4 @@ export class HomePage {
   loadPage(pageNumber: number) {
     this.$articlesPage = this.articleService.getArticles(pageNumber);
   }
-
-  // getPreview = (content: string): string => {
-  //   if (!content) return '';
-  //   const sentences = content.split(/(?<=[.!?])\s+/);
-  //   return sentences.slice(0, 3).join(' ');
-  // };
 }

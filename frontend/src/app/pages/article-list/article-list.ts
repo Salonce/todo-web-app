@@ -15,11 +15,13 @@ export class ArticleList {
 
   @Input() articles : Article[] = [];
 
-  getPreview = (content: string): string => {
-    if (!content) return '';
-    const sentences = content.split(/(?<=[.!?])\s+/);
-    return sentences.slice(0, 3).join(' ');
-  };
+getPreview(content: string, sentences: number = 3): string {
+  // naive example: split by sentences
+  const match = content.match(/.*?[.!?](\s|$)/g);
+  if (!match) return content;
+  const preview = match.slice(0, sentences).join(' ');
+  return preview; // keep HTML tags intact
+}
 
   getSafeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);

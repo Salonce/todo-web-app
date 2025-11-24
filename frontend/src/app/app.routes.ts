@@ -8,6 +8,7 @@ import { DashboardLayout } from './layouts/dashboard-layout/dashboard-layout';
 import { DashboardHomePage } from './pages/dashboard-home-page/dashboard-home-page';
 import { ArticleNewPage } from './pages/article-new-page/article-new-page';
 import { ArticlePage } from './pages/article-page/article-page';
+import { ArticleManagementPage } from './pages/article-management-page/article-management-page';
 
 export const routes: Routes = [
     {
@@ -32,7 +33,8 @@ export const routes: Routes = [
         component: DashboardLayout,
         children: [
             { path: 'dashboard', component: DashboardHomePage },
-            { path: 'new-article', component: ArticleNewPage },
+            { path: 'dashboard/create-article', component: ArticleNewPage },
+            { path: 'dashboard/article-management', component: ArticleManagementPage },
         ]
     },
     {

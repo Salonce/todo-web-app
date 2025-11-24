@@ -1,4 +1,3 @@
-import { Article } from "./article";
 import { Pageable } from "./pageable";
 import { Sort } from "./sort";
 

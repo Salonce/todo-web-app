@@ -9,6 +9,13 @@
         [href]="'http://localhost:4200/articles/' + article.slug"
         target="_blank"
       >
+
+        <!-- Date (formatted nicely) -->
+        <p class="text-sm text-gray-500 mb-2">
+          Published on {{ article.createdAt | date: 'longDate' }} 
+          at {{ article.createdAt | date: 'shortTime' }}
+        </p>
+
         <!-- Title -->
         <h2 class="text-xl font-semibold text-gray-800 mb-2 break-words">
           {{ article.title }}

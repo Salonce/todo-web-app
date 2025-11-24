@@ -8,7 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import salonce.dev.todolist.account.infrastructure.security.AccountPrincipal;
 import salonce.dev.todolist.article.application.ArticleService;
-import salonce.dev.todolist.article.presentation.dtos.ArticleSaveRequest;
+import salonce.dev.todolist.article.presentation.dtos.ArticleCreateRequest;
 import salonce.dev.todolist.article.presentation.dtos.ArticleResponse;
 
 @RestController
@@ -29,7 +29,7 @@ public class ArticleController {
 
     // limit permissions to admin and mod in the service
     @PostMapping("/api/articles")
-    public ResponseEntity<ArticleResponse> saveArticle(@AuthenticationPrincipal AccountPrincipal principal, @RequestBody ArticleSaveRequest articleSaveRequest){
-        return ResponseEntity.ok(articleService.saveArticle(principal, articleSaveRequest));
+    public ResponseEntity<ArticleResponse> saveArticle(@AuthenticationPrincipal AccountPrincipal principal, @RequestBody ArticleCreateRequest articleCreateRequest){
+        return ResponseEntity.ok(articleService.saveArticle(principal, articleCreateRequest));
     }
 }

@@ -12,7 +12,7 @@ import salonce.dev.todolist.article.application.exceptions.ArticleNotFound;
 import salonce.dev.todolist.article.domain.Article;
 import salonce.dev.todolist.article.infrastructure.ArticleRepository;
 import salonce.dev.todolist.article.presentation.ArticleMapper;
-import salonce.dev.todolist.article.presentation.dtos.ArticleSaveRequest;
+import salonce.dev.todolist.article.presentation.dtos.ArticleCreateRequest;
 import salonce.dev.todolist.article.presentation.dtos.ArticleResponse;
 
 
@@ -34,9 +34,9 @@ public class ArticleService {
     }
 
     @Transactional
-    public ArticleResponse saveArticle(AccountPrincipal principal, ArticleSaveRequest articleSaveRequest){
+    public ArticleResponse saveArticle(AccountPrincipal principal, ArticleCreateRequest articleCreateRequest){
         Account account = accountService.findAccount(principal.id());
-        Article article = new Article(articleSaveRequest.title(), generateSlug(articleSaveRequest.title()), articleSaveRequest.content(), account);
+        Article article = new Article(articleCreateRequest.title(), generateSlug(articleCreateRequest.title()), articleCreateRequest.content(), account);
         return ArticleMapper.toArticleResponse(articleRepository.save(article));
     }
 

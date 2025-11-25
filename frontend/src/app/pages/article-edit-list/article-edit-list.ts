@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core';
 import { Article } from '../../core/models/article';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-article-edit-list',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './article-edit-list.html',
   styleUrl: './article-edit-list.css'
 })
@@ -25,4 +26,8 @@ export class ArticleEditList {
   getSafeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
+
+  editArticle(slug: string){}
+
+  deleteArticle(slug: string){}
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Article } from '../../core/models/article';
+import { Article } from '../../../core/models/article';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';

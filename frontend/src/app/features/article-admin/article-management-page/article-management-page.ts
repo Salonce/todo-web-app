@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ArticleService } from '../../core/article-service/article-service';
-import { Article } from '../../core/models/article';
-import { Page } from '../../core/models/page';
+import { ArticleService } from '../../../core/article-service/article-service';
+import { Article } from '../../../core/models/article';
+import { Page } from '../../../core/models/page';
 import { AsyncPipe } from '@angular/common';
-import { Pagination } from '../pagination/pagination';
+import { Pagination } from '../../../shared/pagination/pagination';
 import { ArticleEditList } from '../article-edit-list/article-edit-list';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../../core/account-service/account-service';
+import { AccountService } from '../../../core/account-service/account-service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Account } from '../../core/models/account';
+import { Account } from '../../../core/models/account';
 
 @Component({
   selector: 'app-account-details-page',

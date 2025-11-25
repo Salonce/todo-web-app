@@ -11,7 +11,7 @@ import { Account } from '../../core/models/account';
 })
 export class AccountEditPage {
 
-  originalAccount!: Account;
+  originalAccount: Account | null = null;
   account = { name: '', email: '' };
 
   constructor(private accountService: AccountService) {}
@@ -28,6 +28,8 @@ export class AccountEditPage {
   }
 
   onCancel() {
-    this.account = { ...this.originalAccount }; // discard changes
+    if (this.originalAccount) {
+      this.account = { ...this.originalAccount };
+    }
   }
 }

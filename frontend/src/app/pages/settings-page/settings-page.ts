@@ -10,7 +10,7 @@ import { Account } from '../../core/models/account';
 })
 export class SettingsPageComponent {
 
-  account!: Account;
+  account: Account | null = null;
 
   constructor(private accountService: AccountService) {}
 

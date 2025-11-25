@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
-import { Principal } from '../models/principal';
+import { Principal } from '../../../core/models/principal';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

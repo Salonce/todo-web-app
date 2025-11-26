@@ -19,7 +19,7 @@
         />
       </div>
 
-      <!-- Content with Quill Editor -->
+      <!-- Content with Quill Editor 
       <div>
         <label class="block text-gray-500 text-sm mb-2" for="content">Content</label>
         <quill-editor
@@ -32,6 +32,11 @@
           class="w-full border border-gray-300 rounded-xl overflow-auto text-base">
         </quill-editor>
       </div>
+      -->
+
+      <app-quill-editor
+        [(content)]="article.content">
+      </app-quill-editor>
 
       <!-- Submit Button -->
       <button

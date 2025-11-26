@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../../../core/article-service/article-service';
-import { QuillModule } from 'ngx-quill';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ArticleEdit } from '../../../core/models/article-edit';
 import { NewArticle } from '../../../core/models/new-article';
+import { QuillEditor } from '../quill-editor/quill-editor';
 
 @Component({
   selector: 'app-article-edit-page',
-  imports: [QuillModule, FormsModule],
+  imports: [QuillEditor, FormsModule],
   templateUrl: './article-edit-page.html',
   styleUrl: './article-edit-page.css'
 })

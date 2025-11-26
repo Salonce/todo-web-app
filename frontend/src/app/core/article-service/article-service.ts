@@ -42,7 +42,7 @@ export class ArticleService {
   }
 
   getArticleById(id : number) : Observable<NewArticle> {
-    return this.http.get<NewArticle>(`http://localhost:8080/api/articles/{id}`, {withCredentials: true}).pipe(
+    return this.http.get<NewArticle>(`http://localhost:8080/api/articles/${id}`, {withCredentials: true}).pipe(
       catchError(err => {
         console.error('Failed to fetch article', err);
         return throwError(() => new Error('Could not fetch article'));
@@ -60,7 +60,7 @@ export class ArticleService {
   }
 
   patchArticle(id: number, article: NewArticle) : Observable<NewArticle> {
-    return this.http.patch<NewArticle>(`http://localhost:8080/api/articles/{id}`, article, {withCredentials : true}).pipe(
+    return this.http.patch<NewArticle>(`http://localhost:8080/api/articles/${id}`, article, {withCredentials : true}).pipe(
       catchError(err => {
         console.error('Failed to post article', err);
         return throwError(() => new Error('Could not fetch article'));

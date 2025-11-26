@@ -45,6 +45,23 @@ public class ArticleService {
         return ArticleMapper.toArticleResponse(articleRepository.save(article));
     }
 
+    @Transactional
+    public ArticleViewResponse patchArticle(AccountPrincipal principal, ArticleCreateRequest articleCreateRequest, Long articleId){
+        Account account = accountService.findAccount(principal.id());
+        Article article = articleRepository.findById(articleId).orElseThrow(ArticleNotFound::new);
+
+        // domain rules: check permissions
+        // article.checkPermission(principal);
+
+        // apply patch (domain methods)
+        if (articleCreateRequest.title() != null) article.setTitle(articleCreateRequest.title());
+        if (articleCreateRequest.content() != null) article.setContent(articleCreateRequest.content());
+
+        articleRepository.save(article);
+
+        return ArticleMapper.toArticleResponse(articleRepository.save(article));
+    }
+
     private String generateSlug(String title) {
         return title.toLowerCase()
                 .trim()

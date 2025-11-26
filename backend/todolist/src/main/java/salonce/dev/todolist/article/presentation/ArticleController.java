@@ -33,8 +33,8 @@ public class ArticleController {
     }
 
     @PatchMapping("/api/articles/{id}")
-    public ResponseEntity<ArticleViewResponse> PartchArticle(@AuthenticationPrincipal AccountPrincipal principal, @PathVariable Long id){
-        //return ResponseEntity.ok(articleService.patchArticle(id));
+    public ResponseEntity<ArticleViewResponse> PatchArticle(@AuthenticationPrincipal AccountPrincipal principal, @RequestBody ArticleCreateRequest articleCreateRequest, @PathVariable Long id){
+        return ResponseEntity.ok(articleService.patchArticle(principal, articleCreateRequest, id));
     }
 
     // limit permissions to admin and mod in the service

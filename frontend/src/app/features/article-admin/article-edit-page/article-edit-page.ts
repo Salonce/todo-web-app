@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../../../core/article-service/article-service';
-import { NewArticle } from '../../../core/models/new-article';
-import Quill from 'quill';
 import { QuillModule } from 'ngx-quill';
 import { FormsModule } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Article } from '../../../core/models/article';
 import { ArticleEdit } from '../../../core/models/article-edit';
+import { NewArticle } from '../../../core/models/new-article';
 
 @Component({
   selector: 'app-article-edit-page',
@@ -21,7 +18,7 @@ export class ArticleEditPage implements OnInit{
   
     id! : number;
 
-    article  : ArticleEdit | null = null;;
+    article  : NewArticle | null = null;;
 
     ngOnInit(): void {
       this.route.params.subscribe(params => {
@@ -32,7 +29,7 @@ export class ArticleEditPage implements OnInit{
   
     loadArticle(id: number) {
       this.articleService.getArticleById(id).subscribe({
-        next: (article: ArticleEdit) => {
+        next: (article: NewArticle) => {
           this.article = article;
         },
         error: (err) => {
@@ -44,7 +41,7 @@ export class ArticleEditPage implements OnInit{
     onSubmit() {
       if (!this.article) return;
 
-      this.articleService.editArticle(this.article).subscribe({
+      this.articleService.patchArticle(this.id, this.article).subscribe({
         next: res => console.log('Updated:', res),
         error: err => console.error('Failed to update:', err)
       });

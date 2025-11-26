@@ -22,9 +22,14 @@ public class ArticleController {
         return ResponseEntity.ok(articleService.getAllArticles(pageable));
     }
 
-    @GetMapping("/api/articles/{slug}")
+    @GetMapping("/api/articles/slug/{slug}")
     public ResponseEntity<ArticleViewResponse> getArticleResponse(@AuthenticationPrincipal AccountPrincipal principal, @PathVariable String slug){
         return ResponseEntity.ok(articleService.getArticle(slug));
+    }
+
+    @GetMapping("/api/articles/{id}")
+    public ResponseEntity<ArticleViewResponse> getArticleResponse(@AuthenticationPrincipal AccountPrincipal principal, @PathVariable Long id){
+        return ResponseEntity.ok(articleService.getArticle(id));
     }
 
     // limit permissions to admin and mod in the service

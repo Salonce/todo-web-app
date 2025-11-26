@@ -4,6 +4,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { NewArticle } from '../models/new-article';
 import { Page } from '../models/page';
 import { Article } from '../models/article';
+import { ArticleEdit } from '../models/article-edit';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,16 @@ export class ArticleService {
   }
 
   getArticleBySlug(slug : string) : Observable<Article> {
-    return this.http.get<Article>(`http://localhost:8080/api/articles/${slug}`, {withCredentials: true}).pipe(
+    return this.http.get<Article>(`http://localhost:8080/api/articles/slug/${slug}`, {withCredentials: true}).pipe(
+      catchError(err => {
+        console.error('Failed to fetch article', err);
+        return throwError(() => new Error('Could not fetch article'));
+      })
+    );
+  }
+
+  getArticleById(id : number) : Observable<ArticleEdit> {
+    return this.http.get<ArticleEdit>(`http://localhost:8080/api/articles/{id}`, {withCredentials: true}).pipe(
       catchError(err => {
         console.error('Failed to fetch article', err);
         return throwError(() => new Error('Could not fetch article'));
@@ -42,6 +52,15 @@ export class ArticleService {
 
   postArticle(article: NewArticle) : Observable<NewArticle> {
     return this.http.post<NewArticle>(this.apiUrl, article, {withCredentials : true}).pipe(
+      catchError(err => {
+        console.error('Failed to post article', err);
+        return throwError(() => new Error('Could not fetch article'));
+      })
+    );
+  }
+
+  editArticle(article: ArticleEdit) : Observable<ArticleEdit> {
+    return this.http.patch<ArticleEdit>(this.apiUrl, article, {withCredentials : true}).pipe(
       catchError(err => {
         console.error('Failed to post article', err);
         return throwError(() => new Error('Could not fetch article'));

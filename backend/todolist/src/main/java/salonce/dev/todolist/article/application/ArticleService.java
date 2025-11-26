@@ -33,6 +33,11 @@ public class ArticleService {
         return ArticleMapper.toArticleResponse(article);
     }
 
+    public ArticleViewResponse getArticle(Long id){
+        Article article = articleRepository.findById(id).orElseThrow(ArticleNotFound::new);
+        return ArticleMapper.toArticleResponse(article);
+    }
+
     @Transactional
     public ArticleViewResponse saveArticle(AccountPrincipal principal, ArticleCreateRequest articleCreateRequest){
         Account account = accountService.findAccount(principal.id());

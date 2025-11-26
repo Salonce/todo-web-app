@@ -20,21 +20,6 @@ export class ArticleEditPage {
       content: ''
     };
   
-    editorModules = {
-      toolbar: [
-        ['bold', 'italic', 'underline', 'strike'],
-        ['blockquote', 'code-block'],
-        [{ 'header': 1 }, { 'header': 2 }],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        ['link', 'image'],
-        ['clean']
-      ],
-      imageResize: {
-        modules: ['Resize', 'DisplaySize']
-      }
-    };
-  
     onSubmit() {
       console.log('Article object:', this.article);
       console.log('Content value:', this.article.content);

@@ -19,21 +19,6 @@
         />
       </div>
 
-      <!-- Content with Quill Editor 
-      <div>
-        <label class="block text-gray-500 text-sm mb-2" for="content">Content</label>
-        <quill-editor
-          id="content"
-          [(ngModel)]="article.content"
-          name="content"
-          [modules]="editorModules"
-          [style]="{height: '600px'}"
-          placeholder="Write your article here..."
-          class="w-full border border-gray-300 rounded-xl overflow-auto text-base">
-        </quill-editor>
-      </div>
-      -->
-
       <app-quill-editor
         [(content)]="article.content">
       </app-quill-editor>

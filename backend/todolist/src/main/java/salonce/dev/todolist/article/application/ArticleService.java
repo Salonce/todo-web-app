@@ -13,7 +13,7 @@ import salonce.dev.todolist.article.domain.Article;
 import salonce.dev.todolist.article.infrastructure.ArticleRepository;
 import salonce.dev.todolist.article.presentation.ArticleMapper;
 import salonce.dev.todolist.article.presentation.dtos.ArticleCreateRequest;
-import salonce.dev.todolist.article.presentation.dtos.ArticleResponse;
+import salonce.dev.todolist.article.presentation.dtos.ArticleViewResponse;
 
 
 @Service
@@ -24,17 +24,17 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     @Transactional
-    public Page<ArticleResponse> getAllArticles(Pageable pageable){
+    public Page<ArticleViewResponse> getAllArticles(Pageable pageable){
         return articleRepository.findAll(pageable).map(ArticleMapper::toArticleResponse);
     }
 
-    public ArticleResponse getArticle(String slug){
+    public ArticleViewResponse getArticle(String slug){
         Article article = articleRepository.findBySlug(slug).orElseThrow(ArticleNotFound::new);
         return ArticleMapper.toArticleResponse(article);
     }
 
     @Transactional
-    public ArticleResponse saveArticle(AccountPrincipal principal, ArticleCreateRequest articleCreateRequest){
+    public ArticleViewResponse saveArticle(AccountPrincipal principal, ArticleCreateRequest articleCreateRequest){
         Account account = accountService.findAccount(principal.id());
         Article article = new Article(articleCreateRequest.title(), generateSlug(articleCreateRequest.title()), articleCreateRequest.content(), account);
         return ArticleMapper.toArticleResponse(articleRepository.save(article));

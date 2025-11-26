@@ -1,0 +1,19 @@
+/* Constrain images in Quill editor */
+::ng-deep .ql-editor img {
+  max-width: 100%;
+  height: auto;
+}
+
+::ng-deep .ql-editor {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Constrain any wide elements */
+::ng-deep .ql-editor * {
+  max-width: 100%;
+}
+
+::ng-deep .ql-editor pre {
+  overflow-x: auto;
+}

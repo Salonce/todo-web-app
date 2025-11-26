@@ -1,0 +1,13 @@
+<div class="max-w-4xl mx-auto p-6">
+
+  @if ($articlesPage | async; as page) {
+
+    <app-article-list [articles]="page.content"></app-article-list>
+    <app-pagination [totalPages]="page.totalPages" [currentPage]="page.number" (pageChange)="loadPage($event)"></app-pagination>
+
+  } @else {
+    <p class="text-gray-400 text-center">Loading articles...</p>
+  }
+
+
+</div>

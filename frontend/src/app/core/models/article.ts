@@ -1,6 +1,9 @@
 export interface Article{
+  id : number;
   title : string;
-  slug : string;
   content : string;
+  slug : string;
   authorName : string;
+  createdAt : string;
+  updatedAt : string;
 }

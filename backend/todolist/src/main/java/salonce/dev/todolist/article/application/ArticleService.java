@@ -2,6 +2,8 @@ package salonce.dev.todolist.article.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import salonce.dev.todolist.account.application.AccountService;
 import salonce.dev.todolist.account.domain.Account;
@@ -10,10 +12,9 @@ import salonce.dev.todolist.article.application.exceptions.ArticleNotFound;
 import salonce.dev.todolist.article.domain.Article;
 import salonce.dev.todolist.article.infrastructure.ArticleRepository;
 import salonce.dev.todolist.article.presentation.ArticleMapper;
-import salonce.dev.todolist.article.presentation.dtos.ArticleSaveRequest;
-import salonce.dev.todolist.article.presentation.dtos.ArticleResponse;
+import salonce.dev.todolist.article.presentation.dtos.ArticleCreateRequest;
+import salonce.dev.todolist.article.presentation.dtos.ArticleViewResponse;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,24 +24,41 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     @Transactional
-    public List<ArticleResponse> getAllArticles(){
-        return articleRepository.findAll().stream().map(ArticleMapper::toArticleResponse).toList();
+    public Page<ArticleViewResponse> getAllArticles(Pageable pageable){
+        return articleRepository.findAll(pageable).map(ArticleMapper::toArticleResponse);
     }
 
-//    public ArticleResponse getArticle(Long articleId){
-//        Article article = articleRepository.findById(articleId).orElseThrow(ArticleNotFound::new);
-//        return ArticleMapper.toArticleResponse(article);
-//    }
-
-    public ArticleResponse getArticle(String slug){
+    public ArticleViewResponse getArticle(String slug){
         Article article = articleRepository.findBySlug(slug).orElseThrow(ArticleNotFound::new);
         return ArticleMapper.toArticleResponse(article);
     }
 
+    public ArticleViewResponse getArticle(Long id){
+        Article article = articleRepository.findById(id).orElseThrow(ArticleNotFound::new);
+        return ArticleMapper.toArticleResponse(article);
+    }
+
     @Transactional
-    public ArticleResponse saveArticle(AccountPrincipal principal, ArticleSaveRequest articleSaveRequest){
+    public ArticleViewResponse saveArticle(AccountPrincipal principal, ArticleCreateRequest articleCreateRequest){
         Account account = accountService.findAccount(principal.id());
-        Article article = new Article(articleSaveRequest.title(), generateSlug(articleSaveRequest.title()), articleSaveRequest.content(), account);
+        Article article = new Article(articleCreateRequest.title(), generateSlug(articleCreateRequest.title()), articleCreateRequest.content(), account);
+        return ArticleMapper.toArticleResponse(articleRepository.save(article));
+    }
+
+    @Transactional
+    public ArticleViewResponse patchArticle(AccountPrincipal principal, ArticleCreateRequest articleCreateRequest, Long articleId){
+        Account account = accountService.findAccount(principal.id());
+        Article article = articleRepository.findById(articleId).orElseThrow(ArticleNotFound::new);
+
+        // domain rules: check permissions
+        // article.checkPermission(principal);
+
+        // apply patch (domain methods)
+        if (articleCreateRequest.title() != null) article.setTitle(articleCreateRequest.title());
+        if (articleCreateRequest.content() != null) article.setContent(articleCreateRequest.content());
+
+        articleRepository.save(article);
+
         return ArticleMapper.toArticleResponse(articleRepository.save(article));
     }
 

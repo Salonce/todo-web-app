@@ -20,11 +20,12 @@
 
   <!-- Buttons UNDER the content -->
     <div class="flex gap-3 pt-4 border-t border-gray-200">
-    <button
-        class="px-4 py-2 rounded-lg bg-blue-500 text-white shadow-sm hover:bg-blue-600 hover:shadow transition font-medium"
-        (click)="editArticle(article.slug)">
-        Edit
-    </button>
+    <!-- EDIT BUTTON using routerLink -->
+    <a [routerLink]="['/dashboard', article.id, 'edit']"
+       class="px-4 py-2 rounded-lg bg-blue-500 text-white shadow-sm hover:bg-blue-600 hover:shadow transition font-medium">
+      Edit
+    </a>
+
 
     <button
         class="px-4 py-2 rounded-lg bg-red-500/90 text-white shadow-sm hover:bg-red-600 hover:shadow transition font-medium"

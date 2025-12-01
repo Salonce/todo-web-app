@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   checkAuth() {
-    this.http.get<Principal>('http://localhost:8080/auth', { withCredentials: true })
+    this.http.get<Principal>('http://localhost:8080/api/auth', { withCredentials: true })
       .pipe(
         catchError(() => of(null)) 
       )

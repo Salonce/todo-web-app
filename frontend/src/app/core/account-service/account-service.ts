@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Account } from '../models/account';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable({
@@ -10,18 +11,19 @@ import { Account } from '../models/account';
 
 export class AccountService {
 
-    private apiUrl = 'http://localhost:8080/account';
-    private apiPatchUrl = 'http://localhost:8080/profile';
+    private apiUrl = environment.apiUrl;
+    private accountUrl = this.apiUrl + '/account';
+    private profileUrl = this.apiUrl + '/profile';
 
     constructor(private http: HttpClient) {}
 
     getAccount(): Observable<Account> {
-      return this.http.get<Account>(this.apiUrl, { withCredentials: true });
+      return this.http.get<Account>(this.accountUrl, { withCredentials: true });
     }
 
     patchAccount(partialAccount: Partial<Account>): Observable<Account> {
       return this.http.patch<Account>(
-        this.apiPatchUrl,
+        this.profileUrl,
         partialAccount,
         { withCredentials: true }
       );

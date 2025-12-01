@@ -4,6 +4,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +25,9 @@ import java.util.Set;
 public class CustomOidcSuccessHandler implements AuthenticationSuccessHandler {
 
     private final AccountService accountService;
+
+    @Value("${app.frontend.url}")
+    private String frontendUrl;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
@@ -50,6 +54,7 @@ public class CustomOidcSuccessHandler implements AuthenticationSuccessHandler {
         );
 
         SecurityContextHolder.getContext().setAuthentication(auth);
-        response.sendRedirect("http://localhost:4200/home");
+        System.out.printf(frontendUrl);
+        response.sendRedirect(frontendUrl);
     }
 }

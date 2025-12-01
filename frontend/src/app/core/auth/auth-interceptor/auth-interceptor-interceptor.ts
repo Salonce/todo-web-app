@@ -1,5 +1,5 @@
-import { HttpEvent, HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Observable, catchError, of, throwError } from 'rxjs';
+import { HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
+import { catchError, of, throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next) => {
   return next(req).pipe(

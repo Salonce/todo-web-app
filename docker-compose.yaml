@@ -1,0 +1,9 @@
+services:
+  spring-backend:
+    build:
+      context: ./backend/todolist/
+      dockerfile: dockerfile
+    env_file:
+      - ./backend/todolist/.env
+    ports:
+      - "8080:8080"

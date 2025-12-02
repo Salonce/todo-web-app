@@ -91,8 +91,7 @@ public class Roles {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Roles)) return false;
-        Roles roles = (Roles) o;
+        if (!(o instanceof Roles roles)) return false;
         return Objects.equals(values, roles.values);
     }
 

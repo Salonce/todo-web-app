@@ -69,6 +69,7 @@
 	</dependencies>
 
 	<build>
+        <finalName>app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -85,7 +86,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
 				<configuration>
+                    <mainClass>salonce.dev.todolist.Application</mainClass>
+                    <layout>JAR</layout>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

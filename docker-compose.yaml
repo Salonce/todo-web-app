@@ -8,6 +8,8 @@ services:
     ports:
       - "8080:8080"
     container_name: backend_spring
+    networks:
+    - blog_network
 
   nginx-static:
     build:
@@ -16,3 +18,9 @@ services:
     container_name: nginx_static
     ports:
       - "80:80"
+    networks:
+    - blog_network
+
+networks:
+  blog_network:
+    name: blog_network

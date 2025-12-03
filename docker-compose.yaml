@@ -1,9 +1,18 @@
 services:
-  spring-backend:
+  backend:
     build:
-      context: ./backend/todolist/
-      dockerfile: dockerfile
+      context: ./backend/blog/
+      dockerfile: Dockerfile
     env_file:
-      - ./backend/todolist/.env
+      - ./backend/blog/.env
     ports:
       - "8080:8080"
+    container_name: backend_spring
+
+  nginx-static:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    container_name: nginx_static
+    ports:
+      - "80:80"

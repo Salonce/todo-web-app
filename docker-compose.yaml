@@ -3,8 +3,10 @@ services:
     build:
       context: ./backend/blog/
       dockerfile: Dockerfile
-    env_file:
-      - ./backend/blog/.env
+    environment:
+      BLOG_GOOGLE_CLIENT_ID: ${BLOG_GOOGLE_CLIENT_ID}
+      BLOG_GOOGLE_CLIENT_SECRET: ${BLOG_GOOGLE_CLIENT_SECRET}
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
     ports:
       - "8080:8080"
     container_name: backend_spring
@@ -25,9 +27,9 @@ services:
     image: postgres:18
     container_name: blog_postgres
     environment:
-      POSTGRES_DB: blog
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:

@@ -15,17 +15,17 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    @GetMapping("/auth")
+    @GetMapping("/api/auth")
     public ResponseEntity<AccountPrincipal> getAuth(@AuthenticationPrincipal AccountPrincipal principal){
         return ResponseEntity.ok(principal);
     }
 
-    @GetMapping("/account")
+    @GetMapping("/api/account")
     public ResponseEntity<AccountResponse> getAccount(@AuthenticationPrincipal AccountPrincipal principal){
         return ResponseEntity.ok(AccountMapper.toAccountResponse(accountService.findAccount(principal.id())));
     }
 
-    @PatchMapping("/profile")
+    @PatchMapping("/api/profile")
     public ResponseEntity<AccountResponse> patchProfile(@AuthenticationPrincipal AccountPrincipal principal, @RequestBody PatchProfileRequest patchProfileRequest){
         return ResponseEntity.ok(AccountMapper.toAccountResponse(accountService.updateProfile(principal.id(), patchProfileRequest)));
     }

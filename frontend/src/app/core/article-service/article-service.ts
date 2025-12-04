@@ -5,6 +5,7 @@ import { NewArticle } from '../models/new-article';
 import { Page } from '../models/page';
 import { Article } from '../models/article';
 import { ArticleEdit } from '../models/article-edit';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,15 @@ export class ArticleService {
 
   constructor(private http : HttpClient) {}
 
-  private readonly apiUrl = 'http://localhost:8080/api/articles'
+      private readonly apiUrl = environment.apiUrl;
+      private accountUrl = this.apiUrl + '/account';
 
   getArticles(page: number = 0, size: number = 10): Observable<Page<Article>> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
 
-    return this.http.get<Page<Article>>(this.apiUrl, { 
+    return this.http.get<Page<Article>>(this.apiUrl + '/articles', { 
         params, 
         withCredentials: true 
       }).pipe(
@@ -33,7 +35,7 @@ export class ArticleService {
   }
 
   getArticleBySlug(slug : string) : Observable<Article> {
-    return this.http.get<Article>(`http://localhost:8080/api/articles/slug/${slug}`, {withCredentials: true}).pipe(
+    return this.http.get<Article>(this.apiUrl + `/articles/slug/${slug}`, {withCredentials: true}).pipe(
       catchError(err => {
         console.error('Failed to fetch article', err);
         return throwError(() => new Error('Could not fetch article'));
@@ -42,7 +44,7 @@ export class ArticleService {
   }
 
   getArticleById(id : number) : Observable<NewArticle> {
-    return this.http.get<NewArticle>(`http://localhost:8080/api/articles/${id}`, {withCredentials: true}).pipe(
+    return this.http.get<NewArticle>(this.apiUrl + `/articles/${id}`, {withCredentials: true}).pipe(
       catchError(err => {
         console.error('Failed to fetch article', err);
         return throwError(() => new Error('Could not fetch article'));
@@ -51,7 +53,7 @@ export class ArticleService {
   }
 
   postArticle(article: NewArticle) : Observable<NewArticle> {
-    return this.http.post<NewArticle>(this.apiUrl, article, {withCredentials : true}).pipe(
+    return this.http.post<NewArticle>(this.apiUrl + `/articles`, article, {withCredentials : true}).pipe(
       catchError(err => {
         console.error('Failed to post article', err);
         return throwError(() => new Error('Could not fetch article'));
@@ -60,7 +62,7 @@ export class ArticleService {
   }
 
   patchArticle(id: number, article: NewArticle) : Observable<NewArticle> {
-    return this.http.patch<NewArticle>(`http://localhost:8080/api/articles/${id}`, article, {withCredentials : true}).pipe(
+    return this.http.patch<NewArticle>(this.apiUrl + `/articles/${id}`, article, {withCredentials : true}).pipe(
       catchError(err => {
         console.error('Failed to post article', err);
         return throwError(() => new Error('Could not fetch article'));

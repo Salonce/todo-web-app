@@ -1,0 +1,44 @@
+services:
+  backend:
+    build:
+      context: ./backend/blog/
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/blog/.env
+    ports:
+      - "8080:8080"
+    container_name: backend_spring
+    networks:
+    - blog_network
+
+  nginx-static:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    container_name: nginx_static
+    ports:
+      - "80:80"
+    networks:
+    - blog_network
+
+  postgres:
+    image: postgres:18
+    container_name: blog_postgres
+    environment:
+      POSTGRES_DB: blog
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: yourpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+    networks:
+      - blog_network  
+
+
+networks:
+  blog_network:
+    name: blog_network
+
+volumes:
+  pgdata:

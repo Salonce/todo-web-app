@@ -16,8 +16,15 @@ services:
       - "8080:8080"
     networks:
     - blog_network
-    
-
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      
   nginx-static:
     image: nginx-static
     container_name: nginx-static
@@ -33,6 +40,9 @@ services:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
       - web-root:/var/www/html
+    depends_on:
+      backend:
+        condition: service_healthy
     
   certbot:
     image: certbot/certbot
@@ -41,6 +51,8 @@ services:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
       - web-root:/var/www/html
+    networks:
+    - blog_network
     command: certonly --webroot --webroot-path=/var/www/html --email your-email@example.com --agree-tos --no-eff-email -d yourdomain.com -d www.yourdomain.com
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --quiet; sleep 12h & wait $${!}; done;'"
     
@@ -58,6 +70,11 @@ services:
       - pgdata:/var/lib/postgresql
     networks:
       - blog_network  
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
 networks:
   blog_network:

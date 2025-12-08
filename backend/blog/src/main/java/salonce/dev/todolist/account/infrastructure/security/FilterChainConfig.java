@@ -21,6 +21,7 @@ public class FilterChainConfig {
 
         return http
                 .authorizeHttpRequests( authorize -> authorize
+                        .requestMatchers(HttpMethod.GET,"/actuator/health").permitAll()
                         .requestMatchers("/oauth2/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/articles/**").permitAll()
                         .anyRequest().authenticated())

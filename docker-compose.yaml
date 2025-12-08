@@ -1,5 +1,7 @@
 services:
   backend:
+    image: backend
+    container_name: backend_spring
     build:
       context: ./backend/blog/
       dockerfile: Dockerfile
@@ -7,25 +9,45 @@ services:
       BLOG_GOOGLE_CLIENT_ID: ${BLOG_GOOGLE_CLIENT_ID}
       BLOG_GOOGLE_CLIENT_SECRET: ${BLOG_GOOGLE_CLIENT_SECRET}
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "8080:8080"
-    container_name: backend_spring
     networks:
     - blog_network
+    
 
   nginx-static:
+    image: nginx-static
+    container_name: nginx-static
     build:
       context: ./frontend/
       dockerfile: Dockerfile
-    container_name: nginx_static
     ports:
       - "80:80"
+      - "443:443"
     networks:
     - blog_network
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    command: certonly --webroot --webroot-path=/var/www/html --email your-email@example.com --agree-tos --no-eff-email -d yourdomain.com -d www.yourdomain.com
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --quiet; sleep 12h & wait $${!}; done;'"
+    
 
   postgres:
     image: postgres:18
-    container_name: blog_postgres
+    container_name: postgres
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -37,10 +59,16 @@ services:
     networks:
       - blog_network  
 
-
 networks:
   blog_network:
     name: blog_network
 
 volumes:
   pgdata:
+    name: pgdata
+  certbot-etc:
+    name: certbot-etc
+  certbot-var:
+    name: certbot-var
+  web-root:
+    name: web-root

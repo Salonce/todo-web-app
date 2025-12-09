@@ -21,7 +21,7 @@
           <a [routerLink]="['/settings']" class="text-gray-800 hover:text-gray-600 transition-colors">Settings</a>
           <a href="#/" (click)="onLogout(); $event.preventDefault()" class="text-gray-800 hover:text-gray-600 transition-colors">Log out</a>
         } @else {
-          <a href="http://localhost:8080/oauth2/authorization/google" class="text-gray-800 hover:text-gray-600 transition-colors">Log in</a>
+          <a href="/oauth2/authorization/google" class="text-gray-800 hover:text-gray-600 transition-colors">Log in</a>
         }
       </div>
 

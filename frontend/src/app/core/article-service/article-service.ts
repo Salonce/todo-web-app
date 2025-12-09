@@ -4,7 +4,6 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { NewArticle } from '../models/new-article';
 import { Page } from '../models/page';
 import { Article } from '../models/article';
-import { ArticleEdit } from '../models/article-edit';
 import { environment } from '../../../environments/environment';
 
 @Injectable({

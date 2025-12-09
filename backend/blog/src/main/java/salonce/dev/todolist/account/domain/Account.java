@@ -16,7 +16,6 @@ public class Account {
         this.email = email;
         this.name = name;
         this.addUserRole();
-        this.addAdminRole();
         identities.addIdentity(provider, subject);
     }
 

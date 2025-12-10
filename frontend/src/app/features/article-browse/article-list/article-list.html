@@ -6,8 +6,7 @@
     @for (article of articles; track article.slug) {
       <a
         class="block bg-white shadow p-5 rounded-xl hover:bg-gray-50 transition border border-gray-200"
-        [href]="'http://localhost:4200/articles/' + article.slug"
-        target="_blank"
+        [routerLink]="['/articles', article.slug]"
       >
 
         <!-- Date (formatted nicely) -->

@@ -28,11 +28,13 @@ public class ArticleService {
         return articleRepository.findAll(pageable).map(ArticleMapper::toArticleResponse);
     }
 
+    @Transactional
     public ArticleViewResponse getArticle(String slug){
         Article article = articleRepository.findBySlug(slug).orElseThrow(ArticleNotFound::new);
         return ArticleMapper.toArticleResponse(article);
     }
 
+    @Transactional
     public ArticleViewResponse getArticle(Long id){
         Article article = articleRepository.findById(id).orElseThrow(ArticleNotFound::new);
         return ArticleMapper.toArticleResponse(article);
